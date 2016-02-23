@@ -1,0 +1,250 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[12pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+\setlength{\parindent}{0pt}
+
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{amsmath} %amsmath is part of AMS-LATEX bundles
+\usepackage{amssymb}%symble
+\usepackage{amsfonts}%font
+\usepackage{amsthm}%provide theorem package
+\usepackage{graphicx}
+\usepackage{listings}
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage[retainorgcmds]{IEEEtrantools} %In order to use IEEEeqnarray Environment
+\usepackage{graphicx} % support the \includegraphics command and options
+%\usepackage{indentfirst}%
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%%DEFINE UPRIGHT FONT MISSING FUNCTIONS????????????????????
+\DeclareMathOperator{\argh}{argh}
+\DeclareMathOperator*{\nut}{Nut}
+
+%%%DEFINE NEW COMMANDS
+\newcommand{\ud}{\,\mathrm{d}}
+
+%%%DEFINE THEOREM
+%\theoremstyle{definition} 
+\theoremstyle{definition}\newtheorem{law}{Law}
+\theoremstyle{plain}\newtheorem{jury}[law]{Jury}
+\theoremstyle{remark}\newtheorem{juu}{Juu}
+\theoremstyle{definition}\newtheorem{kuu}[law]{Kuu}
+\theoremstyle{definition}\newtheorem{muu}{Muu}[section]
+\theoremstyle{definition}\newtheorem{honoluu}{Honoluu}[section]
+\theoremstyle{definition}\newtheorem{konoluu}[muu]{Konoluu}
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{\textbf{ \begin{LARGE}Artificial Intelligence\end{LARGE}}\\ [0ex]\begin{Large} Homework 4 \end{Large} }
+\author{Ning Ma}
+\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+{\bf 4.1}
+\begin{enumerate}
+\item[(a)]
+\begin{equation}
+argmin_\beta  \sum_{i=1}^n |y_i - X_i^T \beta| + \lambda_n \sum_{j=1}^p |\beta_j|
+\end{equation}
+\begin{equation}
+P(C=c|A=a,B=b)=\frac{\sum\limits_{t=1}^{T}I(c,c_t)I(b,b_t)I(a,a_t)}{\sum\limits_{t=1}^{T}I(b,b_t)I(a,a_t)}
+\end{equation}
+\begin{equation}
+P(D=d|A=a,B=b,C=c)=\frac{\sum\limits_{t=1}^{T}I(d,d_t)I(c,c_t)I(b,b_t)I(a,a_t)}{\sum\limits_{t=1}^{T}I(c,c_t)I(b,b_t)I(a,a_t)}
+\end{equation}
+
+\item[(b)]
+\begin{IEEEeqnarray}{rCl}
+P(a,c|b,d) & = &\frac{P(a,c,b,d)}{\sum\limits_{a,c}P(a,c,b,d)}
+\\
+& =& \frac{P(a)P(b|a)P(c|b,a)P(d|c,b,a)}{\sum\limits_{a,c}P(a)P(b|a)P(c|b,a)P(d|c,b,a)}
+\end{IEEEeqnarray}
+
+\item[(c)]
+\begin{equation}
+P(a|b,d)=\sum\limits_{c}P(a,c|b,d)
+\end{equation}
+\begin{equation}
+P(c|b,d)=\sum\limits_{a}P(a,c|b,d)
+\end{equation}
+
+\item[(d)]
+\begin{IEEEeqnarray}{rCl}
+L & = & \sum\limits_{t}logP(B=b_t,D=d_t)\\
+& = & \sum\limits_{t}log\sum\limits_{a,c}P(a,B=b_t,c,D=d_t)\\
+& = & \sum\limits_{t}log\sum\limits_{a,c}P(a)P(B=b_t|a)P(c|B=b_t,a)P(D=d_t|c,B=b_t,a)
+\end{IEEEeqnarray}
+
+\item[(e)]
+\begin{equation}
+P(X_i=x|pa_i=\pi)=\frac{\sum\limits_{t}P(X_i=x,pa_i=\pi|V=v(t))}{\sum\limits_{t}P(pa_i=\pi|V=v(t))}
+\end{equation}
+\begin{IEEEeqnarray}{rCl}
+P(A=a|Pa_A=\phi) & = & \frac{\sum\limits_{t}P(A=a|b_t,d_t)}{\sum\limits_{t}P(Pa_A=\phi|b_t,d_t)}\\
+& = & \frac{\sum\limits_{t}P(a|b_t,d_t)}{\sum\limits_{t}1}
+\end{IEEEeqnarray}
+\begin{IEEEeqnarray}{rCl}
+P(B=b|A=a) & = & \frac{\sum\limits_{t}P(A=a,B=b|b_t,d_t)}{\sum\limits_{t}P(A=a|b_t,d_t)}\\
+& = & \frac{\sum\limits_{t}I(b,b_t)P(a|b_t,d_t)}{\sum\limits_{t}P(a|b_t,d_t)}
+\end{IEEEeqnarray}
+\begin{IEEEeqnarray}{rCl}
+P(C=c|A=a,B=b) & = & \frac{\sum\limits_{t}P(C=c,A=a,B=b|b_t,d_t)}{\sum\limits_{t}P(A=a,B=b|b_t,d_t)}\\
+& = & \frac{\sum\limits_{t}I(b,b_t)P(a,c|b_t,d_t)}{\sum\limits_{t}I(b,b_t)P(a|b_t,d_t)}
+\end{IEEEeqnarray}
+\begin{IEEEeqnarray}{rCl}
+P(D=c|A=a,B=b,C=c) & = & \frac{\sum\limits_{t}P(D=d,A=a,B=b,C=c|b_t,d_t)}{\sum\limits_{t}P(A=a,B=b,C=c|b_t,d_t)}\\
+& = & \frac{\sum\limits_{t}I(d,d_t)I(b,b_t)P(a,c|b_t,d_t)}{\sum\limits_{t}I(b,b_t)P(a,c|b_t,d_t)}
+\end{IEEEeqnarray}
+\end{enumerate}
+
+\textbf{4.2}
+\begin{IEEEeqnarray}{rCl}
+L & = & \sum\limits_{t}log P(y_t|\vec{x}_t)\\
+& = & \sum\limits_{t}[(1-y_t)log P(y=0|\vec{x}_t)+y_tlog P(y=1|\vec{x}_t)]\\
+& = & \sum\limits_{t}[(1-y_t)log \prod_{i=1}^n(1-p_i)^{x_{it}}+y_tlog (1-\prod_{i=1}^n(1-p_i)^{x_{it}})]\\
+& = & \sum\limits_{t}[(1-y_t)\sum\limits_{i=1}^nx_{it}log(1-p_i)+y_tlog (1-\prod_{i=1}^n(1-p_i)^{x_{it}})]
+\end{IEEEeqnarray}
+After 64 iterations I got the following table:\\
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+num & 0 & 1 & 2 & 4 & 8 & 16 & 32 & 64 \\
+\hline
+L & -7088.1 & -6746.8 & -6617.7 & -6539.6 & -6475.1 & -6391.5 & -6345.3 & -6335.1 \\
+\hline
+\end{tabular}\\
+\\
+
+The estimates for the parameter $p_i$ are
+\begin{lstlisting}
+P =
+
+    0.5134
+    0.3151
+    0.2902
+    0.1613
+    0.1733
+    0.1569
+    0.1245
+    0.0917
+    0.0569
+    0.0883
+    0.0753
+    0.0691
+    0.0798
+    0.0758
+    0.0861
+    0.0768
+    0.0679
+    0.0590
+\end{lstlisting}
+
+The following is the Matlab source code\\
+
+\begin{lstlisting}
+---------------calculate the Likelihood-----------------
+
+function L=cse_hw4_2_L(X,Y,P,n,T)
+%calculate the log likelihoood in each iteration
+%n=size(X,2);
+%T=size(X,1);
+L=0;
+for t=1:T
+    sum=0;
+    product=1;
+    for i=1:n
+        sum=sum+X(t,i)*log(1-P(i));
+    end
+    for i=1:n
+        product=product*(1-P(i))^(X(t,i));
+    end
+    L=L+(1-Y(t))*sum+Y(t)*log(1-product);
+end
+\end{lstlisting}
+
+\begin{lstlisting}
+-----------------calculate the updated probability--------------
+
+function P=cse_hw4_2_P(X,Y,Pb,n,T)
+%calculate the updated probability in each iteration
+%n is the number of diseases, T is the number of samples(patients),Pb is
+%the estimation of probability before update
+P=Pb;
+for i=1:n
+    summation=0;
+    for t=1:T
+        product=1;
+        for j=1:n
+            product=product*(1-Pb(j))^(X(t,j));
+        end
+        summation=summation+Y(t)*X(t,i)*Pb(i)/(1-product);
+    end
+    P(i)=summation/sum(X(:,i));
+end
+\end{lstlisting}
+        
+\begin{lstlisting}
+-------------------main code---------------------
+
+%HW4.2 Ning Ma
+X=importdata('X.dat.txt');
+Y=importdata('Y.dat.txt');
+n=size(X,2);
+T=size(X,1);
+P=zeros(n,1)+0.2;
+FID=fopen('cse_hw4_2_likelihoodtable', 'w+');
+L=cse_hw4_2_L(X,Y,P,n,T);
+fprintf(FID,'%-2.1f %-5.1f \n',0,L);
+for iteration=1:64
+    P=cse_hw4_2_P(X,Y,P,n,T);
+    L=cse_hw4_2_L(X,Y,P,n,T);
+    fprintf(FID,'%-2.1f %-5.1f \n',iteration,L);
+end
+\end{lstlisting}
+\end{document}
