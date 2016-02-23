@@ -1,4 +1,4 @@
-%HW4.2 Ning Ma
+%HW4.2 Qian Yao 
 
 X=importdata('X.dat.txt');
 Y=importdata('Y.dat.txt');
